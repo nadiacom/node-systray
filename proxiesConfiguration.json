@@ -1,0 +1,24 @@
+{
+  "configs": {
+    "etrm": {
+      "cluster": "bcm-energy-production",
+      "instance": "etrm-14",
+      "port": 54320
+    },
+    "cascade": {
+      "cluster": "bcm-energy-production",
+      "instance": "cascade",
+      "port": 25432
+    },
+    "dam": {
+      "cluster": "bcm-energy-production",
+      "instance": "dam",
+      "port": 45432
+    },
+    "atlantis": {
+      "cluster": "bcm-energy-production",
+      "instance": "atlantis-14",
+      "port": 35432
+    }
+  }
+}

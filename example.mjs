@@ -1,69 +1,46 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import os from 'os'
 import SysTray from './index.js'
+import { spawn } from 'node:child_process'
+import buildProxiesMenuItems from './proxies.mjs';
 
-const item1 = {
-  title: 'aa',
-  tooltip: 'bb',
-  // checked is implemented by plain text in linux
-  checked: false,
-  enabled: true,
-  // click is not a standard property but a custom value
-  click: () => {
-    item1.checked = !item1.checked
-    systray.sendAction({
-      type: 'update-item',
-      item: item1,
-    })
-    // toggle item 2
-    itemExit.hidden = !itemExit.hidden
-    systray.sendAction({
-      type: 'update-item',
-      item: itemExit,
-    })
-  }
-}
-const item2 = {
-  title: 'aa2',
-  tooltip: 'bb',
-  checked: false,
-  enabled: true,
-  // hidden
-  hidden: false,
-  // add a submenu item
-  items: [{
-    title: 'Submenu',
-    tooltip: 'this is a submenu item',
-    checked: false,
-    enabled: true,
-    click: () => {
-      // open the url
-      console.log('open the url')
-    }
-  }]
-}
+let runnings = [];
+
+const startProxy = (instance, port) => ({
+  instance,
+  process: spawn('cloud_sql_proxy', [`-instances=bcm-energy-production:europe-west1:${instance}=tcp:${port}`])
+});
+
 const itemExit = {
   title: 'Exit',
   tooltip: 'bb',
   checked: false,
   enabled: true,
   click: () => {
+    runnings.forEach( ({process }) => process.kill());
     systray.kill(false)
   }
 }
+
+const sendAction = (self, instanceName, displayName) => {
+  return systray.sendAction({
+    type: 'update-item',
+    item: {
+      ...self,
+      tooltip: `${displayName} is ${self.checked ? 'up' : 'down'}`,
+      title: instanceName
+    }
+  });
+};
+
 const systray = new SysTray.default({
   menu: {
     // you should use .png icon on macOS/Linux, and .ico format on Windows
     icon: os.platform() === 'win32' ? './logo_s.ico' : './logo_s.png',
     isTemplateIcon: os.platform() === 'darwin',
-    title: '标题',
-    tooltip: 'Tips',
-    items: [
-      item1,
-      SysTray.default.separator, // SysTray.separator is equivalent to a MenuItem with "title" equals "<SEPARATOR>"
-      item2,
-      itemExit
-    ]
+    title: 'SQL',
+    tooltip: 'Cloud SQL Proxy switcher',
+    items: buildProxiesMenuItems({deps: { sendAction, startProxy, runningProxies: runnings }, exitButton: itemExit })
   },
   debug: false,
   copyDir: false // copy go tray binary to outside directory, useful for packing tool like pkg.

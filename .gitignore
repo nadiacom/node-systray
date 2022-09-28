@@ -45,3 +45,4 @@ es
 test-dist
 
 package-lock.json
+proxiesConfiguration.json
