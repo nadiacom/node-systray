@@ -7,6 +7,8 @@
 > - a tick is indicating status for each listed instances
 > - shutdown running proxies when closing traybar
 
+![](https://github.com/fvn-bcm-oui/node-systray/blob/main/sqlProxyTray.gif)
+
 ## Install
 ```sh
 npm install
