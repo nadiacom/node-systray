@@ -6,8 +6,8 @@ import buildProxiesMenuItems from './proxies.mjs';
 
 let runnings = [];
 
-const startProxy = (instance, port) => ({
-  instance,
+const startProxy = (entryName, instance, port) => ({
+  entryName,
   process: spawn('cloud_sql_proxy', [`-instances=bcm-energy-production:europe-west1:${instance}=tcp:${port}`])
 });
 
@@ -22,13 +22,13 @@ const itemExit = {
   }
 }
 
-const sendAction = (self, instanceName, displayName) => {
+const sendAction = (self, entryName, displayName) => {
   return systray.sendAction({
     type: 'update-item',
     item: {
       ...self,
       tooltip: `${displayName} is ${self.checked ? 'up' : 'down'}`,
-      title: instanceName
+      title: entryName
     }
   });
 };

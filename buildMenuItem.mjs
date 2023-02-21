@@ -1,30 +1,36 @@
-const buildMenuItem = ({cluster, instance, port}) =>
+function logRunningProxies(runningProxies) {
+  console.log(
+    runningProxies
+    .map(({entryName}) => `${entryName}`)
+    .join(', '));
+}
+
+const buildMenuItem = ([ entryName, {cluster, instance, port}]) =>
   ({ sendAction, startProxy, runningProxies }) => {
     const proxy = {
-      title: instance,
+      title: entryName,
       tooltip: `${instance} sur ${cluster}`,
       checked: false,
       enabled: true,
       click: () => {
+        const itemTitle = entryName;
         const instanceName = instance;
         const portNumber = port;
         if (!proxy.checked) {
-          console.log(`Starting proxy for ${instanceName} at ${portNumber} ...`);
-          runningProxies.push(startProxy(instanceName, portNumber));
+          console.log(`Starting proxy for ${entryName}: ${instanceName} at ${portNumber} ...`);
+          runningProxies.push(startProxy(entryName, instanceName, portNumber));
         }
         else {
-          console.log(`... Stopping proxy for ${instanceName} at ${portNumber}`);
-          console.log(
-            runningProxies
-            .map(({instance}) => `${instance}`)
-            .join(', '))
+          console.log(`... Stopping proxy for  ${entryName}: ${instanceName} at ${portNumber}`);
+          logRunningProxies(runningProxies);
           runningProxies
-            .filter(({instance}) => instance === instanceName)
+            .filter(({entryName}) => entryName === itemTitle)
             .forEach(({process}) => process.kill());
           runningProxies = runningProxies.filter(({process}) => !process.killed);
+          logRunningProxies(runningProxies);
         }
         proxy.checked = !proxy.checked
-        sendAction(proxy, instanceName, `${instance} sur ${cluster}]`);
+        sendAction(proxy, itemTitle, `${instance} sur ${cluster}]`);
       }
     };
     return proxy;
