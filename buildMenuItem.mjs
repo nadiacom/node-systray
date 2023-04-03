@@ -16,12 +16,13 @@ const buildMenuItem = ([ entryName, {cluster, instance, port}]) =>
         const itemTitle = entryName;
         const instanceName = instance;
         const portNumber = port;
+        const envName = cluster;
         if (!proxy.checked) {
-          console.log(`Starting proxy for ${entryName}: ${instanceName} at ${portNumber} ...`);
-          runningProxies.push(startProxy(entryName, instanceName, portNumber));
+          console.log(`Starting proxy for ${entryName}: ${envName}-${instanceName} at ${portNumber} ...`);
+          runningProxies.push(startProxy(entryName, envName, instanceName, portNumber));
         }
         else {
-          console.log(`... Stopping proxy for  ${entryName}: ${instanceName} at ${portNumber}`);
+          console.log(`... Stopping proxy for  ${entryName}: ${envName}-${instanceName} at ${portNumber}`);
           logRunningProxies(runningProxies);
           runningProxies
             .filter(({entryName}) => entryName === itemTitle)
@@ -30,7 +31,7 @@ const buildMenuItem = ([ entryName, {cluster, instance, port}]) =>
           logRunningProxies(runningProxies);
         }
         proxy.checked = !proxy.checked
-        sendAction(proxy, itemTitle, `${instance} sur ${cluster}]`);
+        sendAction(proxy, itemTitle, `${instanceName} sur ${envName}]`);
       }
     };
     return proxy;

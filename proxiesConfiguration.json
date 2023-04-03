@@ -5,15 +5,25 @@
       "instance": "etrm-14",
       "port": 54320
     },
-    "cascade": {
+    "cascade-PROD": {
       "cluster": "bcm-energy-production",
       "instance": "cascade",
       "port": 25432
+    },
+    "cascade-beta": {
+      "cluster": "bcm-development",
+      "instance": "cascade",
+      "port": 5432
     },
     "dam": {
       "cluster": "bcm-energy-production",
       "instance": "dam",
       "port": 45432
+    },
+    "trickle-down-PROD": {
+      "cluster": "bcm-energy-production",
+      "instance": "trickle-down",
+      "port": 25433
     },
     "atlantis": {
       "cluster": "bcm-energy-production",

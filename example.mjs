@@ -6,9 +6,9 @@ import buildProxiesMenuItems from './proxies.mjs';
 
 let runnings = [];
 
-const startProxy = (entryName, instance, port) => ({
+const startProxy = (entryName, cluster, instance, port) => ({
   entryName,
-  process: spawn('cloud_sql_proxy', [`-instances=bcm-energy-production:europe-west1:${instance}=tcp:${port}`])
+  process: spawn('cloud_sql_proxy', [`-instances=${cluster}:europe-west1:${instance}=tcp:${port}`])
 });
 
 const itemExit = {
