@@ -20,6 +20,16 @@
       "instance": "dam",
       "port": 45432
     },
+    "dam-beta": {
+      "cluster": "bcm-development",
+      "instance": "dam",
+      "port": 45433
+    },
+    "ruisseau-BETA": {
+      "cluster": "bcm-development",
+      "instance": "dam",
+      "port": 45432
+    },
     "trickle-down-PROD": {
       "cluster": "bcm-energy-production",
       "instance": "trickle-down",
