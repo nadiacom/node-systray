@@ -4,11 +4,13 @@ import SysTray from './index.js'
 import { spawn } from 'node:child_process'
 import buildProxiesMenuItems from './proxies.mjs';
 
+const PROXY_BIN='cloud-sql-proxy';
+
 let runnings = [];
 
 const startProxy = (entryName, cluster, instance, port) => ({
   entryName,
-  process: spawn('cloud_sql_proxy', [`-instances=${cluster}:europe-west1:${instance}=tcp:${port}`])
+  process: spawn(PROXY_BIN, [`${cluster}:europe-west1:${instance}`, '-p', `${port}`])
 });
 
 const itemExit = {

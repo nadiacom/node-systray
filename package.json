@@ -10,7 +10,8 @@
     "lint": "tslint ./src/** --type-check -p ./tsconfig.json",
     "test": "cross-env DEBUG=systray* mocha -r ts-node/register ./*.test.ts",
     "cover": "cross-env NODE_ENV=development nyc ava",
-    "start": "node --inspect example.mjs",
+    "debug": "node --inspect-brk example.mjs",
+    "start": "node example.mjs",
     "preversion": "npm run build"
   },
   "engines": {
