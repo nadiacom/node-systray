@@ -4,13 +4,14 @@ import SysTray from './index.js'
 import { spawn } from 'node:child_process'
 import buildProxiesMenuItems from './proxies.mjs';
 
-const PROXY_BIN='cloud-sql-proxy';
+const PROXY_BIN='~nadia/tools/cloud-sql-proxy';
 
 let runnings = [];
 
-const startProxy = (entryName, cluster, instance, port) => ({
+const startProxy = (entryName, cluster, region, instance, port) => ({
   entryName,
-  process: spawn(PROXY_BIN, [`${cluster}:europe-west1:${instance}`, '-p', `${port}`])
+  process: spawn(PROXY_BIN, [`${cluster}:${region}:${instance} -p ${port} --auto-iam-authn`], {env: process.env,
+    stdio: 'inherit', shell: '/bin/bash'})
 });
 
 const itemExit = {

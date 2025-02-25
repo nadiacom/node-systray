@@ -3,42 +3,68 @@
     "etrm": {
       "cluster": "bcm-energy-production",
       "instance": "etrm-14",
+      "region": "europe-west1",
       "port": 54320
     },
     "cascade-PROD": {
       "cluster": "bcm-energy-production",
       "instance": "cascade",
+      "region": "europe-west1",
       "port": 25432
     },
     "cascade-beta": {
       "cluster": "bcm-development",
       "instance": "cascade",
+      "region": "europe-west1",
       "port": 5432
     },
     "dam": {
       "cluster": "bcm-energy-production",
       "instance": "dam",
+      "region": "europe-west1",
       "port": 45432
     },
     "dam-beta": {
       "cluster": "bcm-development",
       "instance": "dam",
+      "region": "europe-west1",
       "port": 45433
+    },
+    "hermes-PROD": {
+      "cluster": "bcm-energy-production",
+      "instance": "hermes-14",
+      "region": "europe-west1",
+      "port": 45435
+    },
+    "hermes-BETA": {
+      "cluster": "bcm-development",
+      "instance": "hermes",
+      "region": "europe-west3",
+      "port": 45438
     },
     "ruisseau-BETA": {
       "cluster": "bcm-development",
       "instance": "dam",
+      "region": "europe-west1",
       "port": 45432
     },
     "trickle-down-PROD": {
       "cluster": "bcm-energy-production",
       "instance": "trickle-down",
+      "region": "europe-west1",
       "port": 25433
     },
     "atlantis": {
       "cluster": "bcm-energy-production",
       "instance": "atlantis-14",
+      "region": "europe-west1",
       "port": 35432
+    },
+    "yaulogyve": {
+      "cluster": "bcm-energy-production",
+      "instance": "import-gyve",
+      "region": "europe-west1",
+      "port": 6234
     }
   }
 }
