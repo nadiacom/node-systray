@@ -4,7 +4,7 @@ import SysTray from './index.js'
 import { spawn } from 'node:child_process'
 import buildProxiesMenuItems from './proxies.mjs';
 
-const PROXY_BIN='~nadia/tools/cloud-sql-proxy';
+const PROXY_BIN='cloud-sql-proxy';
 
 let runnings = [];
 
